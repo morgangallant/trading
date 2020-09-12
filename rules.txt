@@ -1,0 +1,13 @@
+Here are the rules of the competition:
+
+1. You must start with a fresh https://alpaca.markets paper account with 100k.
+2. You can use any technique, manual or automated, to generate a return. Using data from external
+sources is allowed and encouraged.
+3. Everyone must fully liquidate all owned assets by December 14th, at which point the individual
+with the highest balance wins.
+4. Winner gets free dinner payed for by the rest of the people in the competition.
+
+If you need server hardware or anything, let me know and I can spin something up for you. If you
+want to invite any friends, let me know :)
+
+Good luck!
