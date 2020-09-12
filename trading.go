@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/alpacahq/alpaca-trade-api-go/stream"
+
 	"github.com/alpacahq/alpaca-trade-api-go/alpaca"
 	"github.com/alpacahq/alpaca-trade-api-go/common"
 	"github.com/joho/godotenv"
@@ -39,6 +41,22 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("failed to get alpaca account data: %w", err)
 	}
-	log.Printf("Account ID: %s", acct.ID)
-	return nil
+	log.Println(*acct)
+	if err := stream.Register(alpaca.TradeUpdates, handleTradeUpdate); err != nil {
+		return fmt.Errorf("failed to register for trade updates: %w", err)
+	}
+	if err := stream.Register("Q.AAPL", handleQuote); err != nil {
+		return fmt.Errorf("failed to register for aapl updates: %w", err)
+	}
+	select {}
+}
+
+func handleTradeUpdate(msg interface{}) {
+	update := msg.(alpaca.TradeUpdate)
+	log.Printf("%s event received for order %s.", update.Event, update.Order.ID)
+}
+
+func handleQuote(msg interface{}) {
+	quote := msg.(alpaca.StreamQuote)
+	log.Println(quote.Symbol, quote.BidPrice, quote.BidSize, quote.AskPrice, quote.AskSize)
 }
