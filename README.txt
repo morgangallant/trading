@@ -1,0 +1,1 @@
+This is an autotrading system written using the Alpaca API for a competition between a few friends.
